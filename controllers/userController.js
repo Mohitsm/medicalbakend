@@ -296,3 +296,114 @@ export const updateUser = asyncHandler(async (req, res) => {
     }
   });
 });
+
+// @desc    Create sample users for testing
+// @route   POST /api/users/create-samples
+// @access  Public (temporary for testing)
+export const createSampleUsers = asyncHandler(async (req, res) => {
+  // Check if sample users already exist
+  const existingUsers = await User.countDocuments();
+
+  if (existingUsers > 0) {
+    return res.status(200).json({
+      success: true,
+      message: `${existingUsers} users already exist in database`,
+      data: await User.find().select('-password').limit(5)
+    });
+  }
+
+  // Create sample users
+  const sampleUsers = [
+    {
+      name: 'John Doe',
+      email: 'john@example.com',
+      password: 'password123',
+      phone: '1234567890',
+      address: '123 Main St, City, State',
+      role: 'user',
+      status: 'active'
+    },
+    {
+      name: 'Jane Smith',
+      email: 'jane@example.com',
+      password: 'password123',
+      phone: '0987654321',
+      address: '456 Oak Ave, City, State',
+      role: 'user',
+      status: 'active'
+    },
+    {
+      name: 'Mike Johnson',
+      email: 'mike@example.com',
+      password: 'password123',
+      phone: '5555555555',
+      address: '789 Pine St, City, State',
+      role: 'moderator',
+      status: 'active'
+    },
+    {
+      name: 'Sarah Wilson',
+      email: 'sarah@example.com',
+      password: 'password123',
+      phone: '1111111111',
+      address: '321 Elm St, City, State',
+      role: 'user',
+      status: 'pending'
+    },
+    {
+      name: 'Admin User',
+      email: 'admin@example.com',
+      password: 'password123',
+      phone: '9999999999',
+      address: '999 Admin Blvd, City, State',
+      role: 'admin',
+      status: 'active'
+    }
+  ];
+
+  try {
+    const createdUsers = await User.create(sampleUsers);
+
+    res.status(201).json({
+      success: true,
+      message: `Created ${createdUsers.length} sample users`,
+      data: createdUsers.map(user => ({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        status: user.status,
+        phone: user.phone,
+        address: user.address,
+        createdAt: user.createdAt
+      }))
+    });
+  } catch (error) {
+    res.status(400);
+    throw new Error(`Error creating sample users: ${error.message}`);
+  }
+});
+
+// @desc    Get database status and user count
+// @route   GET /api/users/db-status
+// @access  Public (temporary for testing)
+export const getDatabaseStatus = asyncHandler(async (req, res) => {
+  try {
+    const totalUsers = await User.countDocuments();
+    const users = await User.find().select('-password').limit(10);
+
+    res.status(200).json({
+      success: true,
+      database: 'connected',
+      totalUsers,
+      sampleUsers: users,
+      message: totalUsers === 0 ? 'No users found. Use POST /api/users/create-samples to create test users.' : `Found ${totalUsers} users in database`
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      database: 'error',
+      error: error.message
+    });
+  }
+});

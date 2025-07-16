@@ -7,11 +7,19 @@ import {
   deleteUser,
   getUserById,
   updateUserRole,
-  updateUser
+  updateUser,
+  createSampleUsers,
+  getDatabaseStatus
 } from '../controllers/userController.js';
 import { protect, adminOnly } from '../middleware/auth.js';
 
 const router = express.Router();
+
+// TEMPORARY: Testing endpoints (no authentication required)
+router.get('/db-status', getDatabaseStatus);
+router.post('/create-samples', createSampleUsers);
+router.get('/test', getAllUsers);
+router.get('/stats-test', getUserStats);
 
 // User management routes for admin panel (all require admin authentication)
 

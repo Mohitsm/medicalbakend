@@ -1,7 +1,7 @@
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import asyncHandler from 'express-async-handler';
-import { generateToken } from '../middleware/auth.js';
+import { generateToken, blacklistToken, logUserActivity } from '../middleware/auth.js';
 
 // @desc    Register new user
 // @route   POST /api/auth/register
@@ -182,12 +182,27 @@ export const verifyToken = asyncHandler(async (req, res) => {
 // @route   POST /api/auth/logout
 // @access  Private
 export const logoutUser = asyncHandler(async (req, res) => {
-  // Since we're using stateless JWT, we just send a success response
-  // In a real app, you might want to blacklist the token
-  res.status(200).json({
-    success: true,
-    message: 'User logged out successfully'
-  });
+  try {
+    // Blacklist the current token
+    const token = req.token;
+    const user = req.user;
+
+    if (token && user) {
+      await blacklistToken(token, user._id, user.email, 'logout', req);
+      await logUserActivity(user._id, user.email, 'logout', req, true);
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'User logged out successfully'
+    });
+  } catch (error) {
+    console.error('Logout error:', error);
+    res.status(200).json({
+      success: true,
+      message: 'User logged out successfully'
+    });
+  }
 });
 
 // @desc    Change password
