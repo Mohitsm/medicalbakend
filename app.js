@@ -10,7 +10,6 @@ import brandRoutes from "./routes/brandRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import subCategoryRoutes from "./routes/subCategoryRoutes.js";
 import healthTipRoutes from "./routes/healthTipsRoutes.js";
-<<<<<<< HEAD
 import ourMissionRoutes from "./routes/ourMissionRoutes.js";
 import promoCodeRoutes from "./routes/promoCodeRoutes.js";
 import whyChooseMedCareRoutes from "./routes/whyChooseMedCareRoutes.js";
@@ -21,11 +20,9 @@ import mapEmbedRoutes from "./routes/mapEmbedRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
 
 
-=======
 import orderRoutes from "./routes/orderRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
->>>>>>> 7de3214d051337c3646a9ee2033112de796c723e
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -51,6 +48,13 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/subcategories", subCategoryRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/health-tips', healthTipRoutes);
+app.use("/api/our-mission", ourMissionRoutes);
+app.use('/api/promocodes', promoCodeRoutes);
+app.use("/api/why-choose-medcare", whyChooseMedCareRoutes);
+app.use("/api/testimonials", testimonialRoutes);
+app.use("/api/contact-info", contactInfoRoutes);
+app.use("/api/map-embed", mapEmbedRoutes);
+app.use("/api/contacts", contactRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/admin', adminRoutes);
