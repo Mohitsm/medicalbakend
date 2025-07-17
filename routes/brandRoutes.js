@@ -1,15 +1,24 @@
-import express from "express";
-import upload from "../middleware/upload.js";
+import express from 'express';
 import {
-  createBrand, getAllBrands, getBrandById, updateBrand, deleteBrand
-} from "../controllers/BrandController.js";
+  createBrand,
+  getBrands,
+  getBrandById,
+  updateBrand,
+  deleteBrand,
+} from '../controllers/brandController.js';
+import upload from '../middleware/upload.js';
 
 const router = express.Router();
 
-router.post("/", upload.single("image"), createBrand);
-router.get("/", getAllBrands);
-router.get("/:id", getBrandById);
-router.put("/:id", upload.single("image"), updateBrand);
-router.delete("/:id", deleteBrand);
+router
+  .route('/')
+  .post(upload.single('image'), createBrand)
+  .get(getBrands);
+
+router
+  .route('/:id')
+  .get(getBrandById)
+  .put(upload.single('image'), updateBrand)
+  .delete(deleteBrand);
 
 export default router;

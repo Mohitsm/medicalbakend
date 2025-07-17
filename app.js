@@ -10,6 +10,16 @@ import brandRoutes from "./routes/brandRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import subCategoryRoutes from "./routes/subCategoryRoutes.js";
 import healthTipRoutes from "./routes/healthTipsRoutes.js";
+import ourMissionRoutes from "./routes/ourMissionRoutes.js";
+import promoCodeRoutes from "./routes/promoCodeRoutes.js";
+import whyChooseMedCareRoutes from "./routes/whyChooseMedCareRoutes.js";
+import testimonialRoutes from "./routes/testimonialRoutes.js";
+import contactInfoRoutes from "./routes/contactInfoRoutes.js";
+import productRoutes from "./routes/productRoutes.js";
+import mapEmbedRoutes from "./routes/mapEmbedRoutes.js";
+import contactRoutes from "./routes/contactRoutes.js";
+
+
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -33,7 +43,15 @@ app.use('/api/auth', authRoutes); // Uncomment if auth routes are needed
 app.use("/api/brands", brandRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/subcategories", subCategoryRoutes);
+app.use('/api/products', productRoutes);
 app.use('/api/health-tips', healthTipRoutes);
+app.use("/api/our-mission", ourMissionRoutes);
+app.use('/api/promocodes', promoCodeRoutes);
+app.use("/api/why-choose-medcare", whyChooseMedCareRoutes);
+app.use("/api/testimonials", testimonialRoutes);
+app.use("/api/contact-info", contactInfoRoutes);
+app.use("/api/map-embed", mapEmbedRoutes);
+app.use("/api/contacts", contactRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello World!')

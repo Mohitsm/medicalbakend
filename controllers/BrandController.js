@@ -1,39 +1,86 @@
-import Brand from "../models/Brand.js";
+import Brand from '../models/Brand.js';
+import asyncHandler from 'express-async-handler';
 
-export const createBrand = async (req, res) => {
-  try {
-    const { title } = req.body;
-    const image = req.file?.filename;
-    const brand = await Brand.create({ title, image });
-    res.json(brand);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+// @desc    Create a new brand
+// @route   POST /api/brands
+// @access  Private/Admin
+const createBrand = asyncHandler(async (req, res) => {
+  const { title } = req.body;
+  const image = req.file.path;
+
+  const brandExists = await Brand.findOne({ title });
+  if (brandExists) {
+    res.status(400);
+    throw new Error('Brand already exists');
   }
-};
 
-export const getAllBrands = async (_, res) => {
-  const brands = await Brand.find();
+  const brand = await Brand.create({
+    title,
+    image,
+  });
+
+  if (brand) {
+    res.status(201).json(brand);
+  } else {
+    res.status(400);
+    throw new Error('Invalid brand data');
+  }
+});
+
+// @desc    Get all brands
+// @route   GET /api/brands
+// @access  Public
+const getBrands = asyncHandler(async (req, res) => {
+  const brands = await Brand.find({});
   res.json(brands);
-};
+});
 
-export const getBrandById = async (req, res) => {
+// @desc    Get brand by ID
+// @route   GET /api/brands/:id
+// @access  Public
+const getBrandById = asyncHandler(async (req, res) => {
   const brand = await Brand.findById(req.params.id);
-  brand ? res.json(brand) : res.status(404).json({ error: "Brand not found" });
-};
 
-export const updateBrand = async (req, res) => {
-  try {
-    const { title } = req.body;
-    const updateData = { title };
-    if (req.file) updateData.image = req.file.filename;
-    const brand = await Brand.findByIdAndUpdate(req.params.id, updateData, { new: true });
+  if (brand) {
     res.json(brand);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+  } else {
+    res.status(404);
+    throw new Error('Brand not found');
   }
-};
+});
 
-export const deleteBrand = async (req, res) => {
-  await Brand.findByIdAndDelete(req.params.id);
-  res.json({ message: "Brand deleted" });
-};
+// @desc    Update brand
+// @route   PUT /api/brands/:id
+// @access  Private/Admin
+const updateBrand = asyncHandler(async (req, res) => {
+  const brand = await Brand.findById(req.params.id);
+
+  if (brand) {
+    brand.title = req.body.title || brand.title;
+    brand.image = req.file?.path || brand.image;
+
+    const updatedBrand = await brand.save();
+    res.json(updatedBrand);
+  } else {
+    res.status(404);
+    throw new Error('Brand not found');
+  }
+});
+
+// @desc    Delete brand
+// @route   DELETE /api/brands/:id
+// @access  Private/Admin
+const deleteBrand = asyncHandler(async (req, res) => {
+  const brand = await Brand.findById(req.params.id);
+
+  if (brand) {
+    await Brand.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Brand removed' });
+  } else {
+    res.status(404);
+    throw new Error('Brand not found');
+  }
+});
+
+
+export { createBrand, getBrands, getBrandById, updateBrand, deleteBrand };

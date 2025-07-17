@@ -1,16 +1,27 @@
-import express from "express";
-import upload from "../middleware/upload.js";
+import express from 'express';
 import {
-  createSubCategory, getAllSubCategories, getSubCategoryById,
-  updateSubCategory, deleteSubCategory
-} from "../controllers/subCategoryController.js";
+  createSubcategory,
+  getSubcategories,
+  getSubcategoriesByCategory,
+  getSubcategoryById,
+  updateSubcategory,
+  deleteSubcategory,
+} from '../controllers/subCategoryController.js';
+import upload from '../middleware/upload.js';
 
 const router = express.Router();
 
-router.post("/", upload.single("image"), createSubCategory);
-router.get("/", getAllSubCategories);
-router.get("/:id", getSubCategoryById);
-router.put("/:id", upload.single("image"), updateSubCategory);
-router.delete("/:id", deleteSubCategory);
+router
+  .route('/')
+  .post(upload.single('image'), createSubcategory)
+  .get(getSubcategories);
+
+router.route('/category/:categoryId').get(getSubcategoriesByCategory);
+
+router
+  .route('/:id')
+  .get(getSubcategoryById)
+  .put(upload.single('image'), updateSubcategory)
+  .delete(deleteSubcategory);
 
 export default router;
