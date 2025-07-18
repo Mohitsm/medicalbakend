@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const orderItemSchema = new mongoose.Schema({
  productId: { 
-    type: Number,
+    type: String,
     required: false
   },
   name: {
@@ -91,7 +91,11 @@ const orderSchema = new mongoose.Schema({
     paymentType: {
       type: String,
       required: true,
-      enum: ['cod', 'cash_on_delivery', 'online', 'card', 'upi', 'netbanking', 'wallet', 'COD', 'Online', 'Card', 'UPI', 'Net Banking', 'Wallet'],
+     enum: [
+        'cod', 'cash_on_delivery', 'online', 'card', 'credit_card', 'debit_card',
+        'upi', 'netbanking', 'wallet', 'COD', 'Online', 'Card', 'Credit Card',
+        'Debit Card', 'UPI', 'Net Banking', 'Wallet'
+      ],
       default: 'cod'
     },
     paymentStatus: {

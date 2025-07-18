@@ -18,11 +18,15 @@ import contactInfoRoutes from "./routes/contactInfoRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import mapEmbedRoutes from "./routes/mapEmbedRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
-
+import aboutMedCareRoutes from "./routes/aboutMedCareroutes.js";
+import leadershipRoutes from "./routes/leadershipRoutes.js";
+import certificationRoutes from "./routes/certificationRoutes.js";
+import superAdminRoutes from "./routes/superAdminRoutes.js";
 
 import orderRoutes from "./routes/orderRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
+
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -58,6 +62,10 @@ app.use("/api/contacts", contactRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/admin', adminRoutes);
+app.use("/api/about-medcare", aboutMedCareRoutes);
+app.use('/api/leadership', leadershipRoutes);
+app.use('/api/certifications', certificationRoutes);
+app.use('/api/superadmin', superAdminRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
