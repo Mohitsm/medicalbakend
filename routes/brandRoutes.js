@@ -5,7 +5,7 @@ import {
   getBrandById,
   updateBrand,
   deleteBrand,
-} from '../controllers/brandController.js';
+} from '../controllers/BrandController.js';
 import upload from '../middleware/upload.js';
 
 const router = express.Router();
