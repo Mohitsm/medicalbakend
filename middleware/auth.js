@@ -133,7 +133,7 @@ import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 import Admin from '../models/adminModel.js';
 import TokenBlacklist from '../models/TokenBlacklist.js';
-import UserActivity from '../models/userActivity.js';
+import UserActivity from '../models/UserActivity.js';
 import asyncHandler from 'express-async-handler';
 
 // Protect routes - verify JWT token
