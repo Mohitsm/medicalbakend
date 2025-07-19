@@ -5,7 +5,7 @@ import path from 'path';
 export const createBanner = async (req, res) => {
   try {
     const { title, description } = req.body;
-    const images = req.files?.map(file => file.filename) || [];
+    const images = req.files?.map(file => file.filename) || [];s
 
     console.log("CREATE BANNER BODY:", req.body);
     console.log("UPLOADED FILES:", req.files);
