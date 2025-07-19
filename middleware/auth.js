@@ -130,7 +130,7 @@
 //   }
 // };
 import jwt from 'jsonwebtoken';
-import User from '../models/user.js';
+import User from '../models/User.js';
 import Admin from '../models/adminModel.js';
 import TokenBlacklist from '../models/tokenBlacklist.js';
 import UserActivity from '../models/userActivity.js';

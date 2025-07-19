@@ -1,6 +1,6 @@
 import Admin from '../models/adminModel.js';
 import Order from '../models/Order.js'
-import User from '../models/user.js';
+import User from '../models/User.js';
 import Product from '../models/Product.js';
 import jwt from 'jsonwebtoken';
 import asyncHandler from 'express-async-handler';
