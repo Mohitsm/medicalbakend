@@ -7,4 +7,3 @@ const bannerSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 export default mongoose.model('banner', bannerSchema);
-s
