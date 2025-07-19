@@ -1,4 +1,4 @@
-import Banner from '../models/banner.js';
+import Banner from '../models/Banner.js';
 import fs from 'fs';
 import path from 'path';
 
