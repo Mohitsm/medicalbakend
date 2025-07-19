@@ -1,4 +1,4 @@
-import Subcategory from '../models/Subcategory.js';
+import Subcategory from '../models/subCategory.js';
 import asyncHandler from 'express-async-handler';
 
 // @desc    Create a new subcategory
