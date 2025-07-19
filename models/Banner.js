@@ -6,4 +6,5 @@ const bannerSchema = new mongoose.Schema({
   images: [{ type: String, required: true }]
 }, { timestamps: true });
 
-export default mongoose.model('bsanner', bannerSchema);
+export default mongoose.model('banner', bannerSchema);
+s
