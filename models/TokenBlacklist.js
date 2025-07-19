@@ -40,6 +40,6 @@ tokenBlacklistSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 // Index for fast token lookup
 tokenBlacklistSchema.index({ token: 1 });
 
-const tokenBlacklist = mongoose.model('TokenBlacklist', tokenBlacklistSchema);
+const TokenBlacklist = mongoose.model('TokenBlacklist', tokenBlacklistSchema);
 
-export default tokenBlacklist;
+export default TokenBlacklist;
