@@ -1,4 +1,4 @@
-import OurMission from "../models/OurMission.js";
+import OurMission from "../models/ourMission.js";
 
 export const createMission = async (req, res) => {
   try {

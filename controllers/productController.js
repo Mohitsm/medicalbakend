@@ -1,5 +1,5 @@
 
-import Product from '../models/product.js';
+import Product from '../models/Product.js';
 import asyncHandler from 'express-async-handler';
 
 // Helper function to safely parse JSON strings

@@ -7,5 +7,5 @@ const contactInfoSchema = new mongoose.Schema({
   hours: { type: String, required: true },
 }, { timestamps: true });
 
-const ContactInfo = mongoose.model("ContactInfo", contactInfoSchema);
-export default ContactInfo;
+const contactInfo = mongoose.model("ContactInfo", contactInfoSchema);
+export default contactInfo;

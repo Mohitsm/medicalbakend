@@ -1,4 +1,4 @@
-import Brand from '../models/Brand.js';
+import Brand from '../models/brand.js';
 import asyncHandler from 'express-async-handler';
 
 // @desc    Create a new brand

@@ -56,6 +56,6 @@ userActivitySchema.index({ action: 1, createdAt: -1 });
 // Auto-delete old activity logs after 90 days
 userActivitySchema.index({ createdAt: 1 }, { expireAfterSeconds: 7776000 }); // 90 days
 
-const UserActivity = mongoose.model('UserActivity', userActivitySchema);
+const userActivity = mongoose.model('UserActivity', userActivitySchema);
 
-export default UserActivity;
+export default userActivity;

@@ -1,4 +1,4 @@
-import HealthTip from "../models/HealthTip.js";
+import HealthTip from '../models/HealthTip.js'
 
 export const createTip = async (req, res) => {
   try {

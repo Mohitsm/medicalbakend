@@ -34,6 +34,6 @@ superAdminSchema.methods.comparePassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
-const SuperAdmin = mongoose.model('SuperAdmin', superAdminSchema);
+const superAdmin = mongoose.model('SuperAdmin', superAdminSchema);
 
-export default SuperAdmin;
+export default superAdmin;
