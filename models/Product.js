@@ -26,7 +26,7 @@ const productSchema = new mongoose.Schema(
     },
     subcategory: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Subcategory',
+      ref: 'SubCategory',
       required: true,
     },
     badge: { type: String },
