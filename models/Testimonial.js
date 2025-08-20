@@ -7,5 +7,5 @@ const testimonialSchema = new mongoose.Schema({
   rating: { type: Number, required: true, min: 0, max: 5 },
 }, { timestamps: true });
 
-const testimonial = mongoose.model("Testimonial", testimonialSchema);
-export default testimonial;
+export const Testimonial = mongoose.model("Testimonial", testimonialSchema);
+
