@@ -6,4 +6,4 @@ const whyChooseMedCareSchema = new mongoose.Schema({
   image: { type: String, required: true }, // store image path or base64
 }, { timestamps: true });
 
-export const WhyChooseModel = mongoose.model("WhyChooseModel", whyChooseMedCareSchema);
+export const WhyChooseMedCare = mongoose.model("WhyChooseMedCare", whyChooseMedCareSchema);

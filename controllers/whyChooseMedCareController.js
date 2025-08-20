@@ -1,4 +1,4 @@
-import {WhyChooseModel} from "../models/whyChooseMedCare.js";
+import {WhyChooseMedCare} from "../models/whyChooseMedCare.js";
 import fs from "fs";
 
 // CREATE
@@ -6,7 +6,7 @@ export const createEntry = async (req, res) => {
   try {
     const { title, description } = req.body;
     const image = `/uploads/${req.file.filename}`;
-    const newEntry = new WhyChooseModel({ title, description, image });
+    const newEntry = new WhyChooseMedCare({ title, description, image });
     await newEntry.save();
     res.status(201).json(newEntry);
   } catch (err) {
@@ -17,7 +17,7 @@ export const createEntry = async (req, res) => {
 // GET ALL
 export const getAllEntries = async (req, res) => {
   try {
-    const entries = await WhyChooseModel.find();
+    const entries = await WhyChooseMedCare.find();
     res.json(entries);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -27,7 +27,7 @@ export const getAllEntries = async (req, res) => {
 // GET BY ID
 export const getEntryById = async (req, res) => {
   try {
-    const entry = await WhyChooseModel.findById(req.params.id);
+    const entry = await WhyChooseMedCare.findById(req.params.id);
     if (!entry) return res.status(404).json({ error: "Not found" });
     res.json(entry);
   } catch (err) {
@@ -38,7 +38,7 @@ export const getEntryById = async (req, res) => {
 // UPDATE
 export const updateEntry = async (req, res) => {
   try {
-    const entry = await WhyChooseModel.findById(req.params.id);
+    const entry = await WhyChooseMedCare.findById(req.params.id);
     if (!entry) return res.status(404).json({ error: "Not found" });
 
     if (req.file) {
@@ -61,14 +61,14 @@ export const updateEntry = async (req, res) => {
 // DELETE
 export const deleteEntry = async (req, res) => {
   try {
-    const entry = await WhyChooseModel.findById(req.params.id);
+    const entry = await WhyChooseMedCare.findById(req.params.id);
     if (!entry) return res.status(404).json({ error: "Not found" });
 
     if (entry.image && fs.existsSync("." + entry.image)) {
       fs.unlinkSync("." + entry.image);
     }
 
-    await WhyChooseModel.findByIdAndDelete(req.params.id);
+    await WhyChooseMedCare.findByIdAndDelete(req.params.id);
     res.json({ message: "Deleted" });
   } catch (err) {
     res.status(500).json({ error: err.message });
