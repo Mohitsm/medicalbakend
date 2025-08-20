@@ -1,4 +1,4 @@
-import WhyChooseModel from "../models/whyChooseMedCare.js";
+import {WhyChooseModel} from "../models/whyChooseMedCare.js";
 import fs from "fs";
 
 // CREATE
