@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const OurMissionSchema = new mongoose.Schema(
+const ourMissionSchema = new mongoose.Schema(
   {
     description: { type: String, required: true },
     yearsOfExperience: { type: Number, required: true },
@@ -12,4 +12,4 @@ const OurMissionSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("OurMission", OurMissionSchema);
+export const OurMission= mongoose.model("OurMission", ourMissionSchema);
