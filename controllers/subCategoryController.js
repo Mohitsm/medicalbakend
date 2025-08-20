@@ -1,4 +1,4 @@
-import Subcategory from '../models/subCategory.js';
+import { SubCategory } from '../models/SubCategory.js';
 import asyncHandler from 'express-async-handler';
 
 // @desc    Create a new subcategory
@@ -8,13 +8,13 @@ const createSubcategory = asyncHandler(async (req, res) => {
   const { title, category, brand } = req.body;
   const image = req.file.path;
 
-  const subcategoryExists = await Subcategory.findOne({ title, category });
+  const subcategoryExists = await SubCategory.findOne({ title, category });
   if (subcategoryExists) {
     res.status(400);
     throw new Error('Subcategory already exists for this category');
   }
 
-  const subcategory = await Subcategory.create({
+  const subcategory = await SubCategory.create({
     title,
     image,
     category,
@@ -33,7 +33,7 @@ const createSubcategory = asyncHandler(async (req, res) => {
 // @route   GET /api/subcategories
 // @access  Public
 const getSubcategories = asyncHandler(async (req, res) => {
-  const subcategories = await Subcategory.find({})
+  const subcategories = await SubCategory.find({})
     .populate('category', 'title')
     .populate('brand', 'title');
   res.json(subcategories);
@@ -43,7 +43,7 @@ const getSubcategories = asyncHandler(async (req, res) => {
 // @route   GET /api/subcategories/category/:categoryId
 // @access  Public
 const getSubcategoriesByCategory = asyncHandler(async (req, res) => {
-  const subcategories = await Subcategory.find({
+  const subcategories = await SubCategory.find({
     category: req.params.categoryId,
   })
     .populate('category', 'title')
@@ -55,7 +55,7 @@ const getSubcategoriesByCategory = asyncHandler(async (req, res) => {
 // @route   GET /api/subcategories/:id
 // @access  Public
 const getSubcategoryById = asyncHandler(async (req, res) => {
-  const subcategory = await Subcategory.findById(req.params.id)
+  const subcategory = await SubCategory.findById(req.params.id)
     .populate('category', 'title')
     .populate('brand', 'title');
 
@@ -71,7 +71,7 @@ const getSubcategoryById = asyncHandler(async (req, res) => {
 // @route   PUT /api/subcategories/:id
 // @access  Private/Admin
 const updateSubcategory = asyncHandler(async (req, res) => {
-  const subcategory = await Subcategory.findById(req.params.id);
+  const subcategory = await SubCategory.findById(req.params.id);
 
   if (subcategory) {
     subcategory.title = req.body.title || subcategory.title;
@@ -92,18 +92,19 @@ const updateSubcategory = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 const deleteSubcategory = async (req, res) => {
   try {
-    const deleted = await Subcategory.findByIdAndDelete(req.params.id);
+    const deleted = await SubCategory.findByIdAndDelete(req.params.id);
     if (!deleted) {
       return res.status(404).json({ message: "SubCategory not found" });
     }
-    res.status(200).json({ message: "SubCategory deleted successfully" });
+    res
+      .status(200)
+      .json({ message: "SubCategory deleted successfully" });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
   }
 };
 
-// ✅ export all at once
 export {
   createSubcategory,
   getSubcategories,
