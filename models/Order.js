@@ -225,9 +225,10 @@
 import mongoose from 'mongoose';
 
 const orderItemSchema = new mongoose.Schema({
- productId: { 
-    type: Number,
-    required: false
+  productId: { 
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product',
+    required: true
   },
   name: {
     type: String,
@@ -235,7 +236,6 @@ const orderItemSchema = new mongoose.Schema({
   },
   productImage: {
     type: String,
-    required: false,
     default: ''
   },
   quantity: {
@@ -254,6 +254,7 @@ const orderItemSchema = new mongoose.Schema({
     min: 0
   }
 });
+
 
 const orderSchema = new mongoose.Schema({
   orderNumber: {
