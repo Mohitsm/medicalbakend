@@ -6,4 +6,4 @@ const promoCodeSchema = new mongoose.Schema({
   description: { type: String, required: true },
 }, { timestamps: true });
 
-export default mongoose.model('PromoCode', promoCodeSchema);
+export const PromoCode = mongoose.model('PromoCode', promoCodeSchema);
