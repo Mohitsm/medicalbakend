@@ -1,4 +1,4 @@
-import {ContactInfo} from "../models/contactInfo.js";
+import {ContactInfo} from "../models/ContactInfo.js";
 
 // Create or Replace (Singleton Design)
 export const createOrUpdateContactInfo = async (req, res) => {
